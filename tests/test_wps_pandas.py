@@ -28,7 +28,7 @@ def test_wps_pandas_embedded():
         ),
         version='1.0.0'
     )
-    resp = client.post_xml(doc=request_doc)
+    resp = client.post_xml('/wps', doc=request_doc)
     assert resp.status_code == 200
     penguins = json.loads(resp.data)
     assert penguins[0]['species'] == "Adelie"

@@ -40,7 +40,7 @@ def test_wps_show_defaults_post():
         ),
         version='1.0.0'
     )
-    resp = client.post_xml(doc=request_doc)
+    resp = client.post_xml('/wps', doc=request_doc)
     print(resp.data)
     assert resp.status_code == 200
     result = json.loads(resp.data)

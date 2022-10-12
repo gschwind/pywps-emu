@@ -18,7 +18,7 @@ def resource_file(filepath):
 class WpsTestClient(WpsClient):
 
     def get(self, *args, **kwargs):
-        query = "?"
+        query = "/wps?"
         for key, value in kwargs.items():
             query += u"{0}={1}&".format(key, value)
         return super(WpsTestClient, self).get(query)

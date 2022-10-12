@@ -31,7 +31,7 @@ def test_wps_xml_centroid_post():
         ),
         version='1.0.0'
     )
-    resp = client.post_xml(doc=request_doc)
+    resp = client.post_xml('/wps', doc=request_doc)
     assert_response_success(resp)
     assert get_output(resp.xml) == {'output': "119.59740,-13.57388"}
 
@@ -61,6 +61,6 @@ def test_wps_wkt_centroid_post():
         ),
         version='1.0.0'
     )
-    resp = client.post_xml(doc=request_doc)
+    resp = client.post_xml('/wps', doc=request_doc)
     assert_response_success(resp)
     assert get_output(resp.xml) == {'output': "26.00000,24.00000"}
