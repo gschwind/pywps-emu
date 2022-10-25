@@ -3,9 +3,9 @@ import pytest
 from pywps import Service
 from pywps.tests import assert_response_success
 from emu.processes.wps_ncml import NcMLAgg
-from .common import client_for, CFG_FILE
+from .common import client_for, CFG_FILE, WpsTestClient
 from owslib.wps import WPSExecution
-
+from urllib.parse import urlparse
 
 @pytest.mark.online
 def test_wps_ncml():
@@ -21,5 +21,6 @@ def test_wps_ncml():
     ex = WPSExecution()
     ex.parseResponse(resp.xml)
     d1, d2, d3 = ex.processOutputs
-    ncml = d3.retrieveData()
+    x = urlparse(d3.reference)
+    ncml = super(WpsTestClient, client).get(x.path+'?'+x.query).get_data(True)
     assert ncml.strip().startswith("<")
